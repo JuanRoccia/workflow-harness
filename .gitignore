@@ -1,0 +1,48 @@
+# Workflow Harness - Internal files (these are part of the harness, not user projects)
+# Uncomment below if you want to exclude harness from your project repo
+# /workflow-harness/
+# /agents/
+# /tasks/
+# /skills/
+# /audits/
+# /user/
+# AGENTS.md
+# feature_list.json
+# init.sh
+# .workflow-config.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment
+.env
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db

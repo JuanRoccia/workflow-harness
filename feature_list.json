@@ -1,0 +1,120 @@
+{
+  "project": "workflow-harness",
+  "description": "Sistema de orquestación de workflow para agentes de IA. Estructura genérica para gestionar proyectos mediante múltiples agentes especializados.",
+  "rules": {
+    "one_feature_at_a_time": true,
+    "require_tests_to_close": true,
+    "valid_status": ["pending", "in_progress", "done", "blocked"],
+    "valid_priority": ["high", "medium", "low"]
+  },
+  "features": [
+    {
+      "id": 1,
+      "name": "init_script",
+      "title": "Script de inicialización del entorno",
+      "description": "Crear init.sh que verifique la integridad del harness y recopile contexto del proyecto.",
+      "priority": "high",
+      "acceptance": [
+        "Existe init.sh ejecutable",
+        "Verifica estructura de directorios (agents/, tasks/, skills/, tests/)",
+        "Verifica archivos base (AGENTS.md, feature_list.json, etc.)",
+        "Recopila información del proyecto mediante preguntas interactivas",
+        "Genera .workflow-config.json con la configuración",
+        "Crea .gitignore si se requiere para GitHub"
+      ],
+      "status": "done"
+    },
+    {
+      "id": 2,
+      "name": "agents_md_entrypoint",
+      "title": "Punto de entrada AGENTS.md",
+      "description": "AGENTS.md genérico como punto de entrada del workflow.",
+      "priority": "high",
+      "acceptance": [
+        "Existe AGENTS.md como punto de entrada principal",
+        "Referencia a init.sh como paso obligatorio",
+        "Referencia a progress/current.md para estado de sesión",
+        "Referencia a feature_list.json para gestión de tareas",
+        "Mapa del repositorio adaptado a estructura genérica",
+        "Reglas duras y ciclo de vida de sesión definidos",
+        "Sin referencias a proyectos específicos (DIROCCO, BuscoInmueble)"
+      ],
+      "status": "done"
+    },
+    {
+      "id": 3,
+      "name": "clean_project_references",
+      "title": "Limpiar referencias de proyectos específicos",
+      "description": "Eliminar o adaptar contenido en agents/, tasks/, y archivos MD que referencien proyectos específicos (real estate, e-commerce).",
+      "priority": "high",
+      "acceptance": [
+        "Archivos en agents/ son genéricos y reutilizables",
+        "Archivos en tasks/ no referencian proyectos específicos",
+        "TASK-PRINCIPAL.md es genérico o se elimina/adapta",
+        "BUGS-REPORT.md es una plantilla genérica",
+        "TESTING-MANUAL.md es una guía genérica",
+        "initial-prompt.txt se elimina o adapta a uso general"
+      ],
+      "status": "done"
+    },
+    {
+      "id": 4,
+      "name": "progress_structure",
+      "title": "Estructura de progreso (progress/)",
+      "description": "Crear directorio progress/ con current.md e history.md para seguimiento de sesiones.",
+      "priority": "high",
+      "acceptance": [
+        "Existe directorio progress/",
+        "progress/current.md con plantilla de sesión actual",
+        "progress/history.md como bitácora append-only",
+        "AGENTS.md referencia correctamente estos archivos",
+        "init.sh verifica existencia de progress/"
+      ],
+      "status": "done"
+    },
+    {
+      "id": 5,
+      "name": "docs_structure",
+      "title": "Estructura de documentación (docs/)",
+      "description": "Crear directorio docs/ con architecture.md, conventions.md y verification.md.",
+      "priority": "medium",
+      "acceptance": [
+        "Existe directorio docs/",
+        "docs/architecture.md define qué es 'buen trabajo' en el harness",
+        "docs/conventions.md con reglas de estilo y estructura",
+        "docs/verification.md con criterios de verificación",
+        "AGENTS.md referencia estos archivos en el mapa",
+        "init.sh verifica existencia de docs/"
+      ],
+      "status": "done"
+    },
+    {
+      "id": 6,
+      "name": "skills_audit",
+      "title": "Auditoría y limpieza de skills",
+      "description": "Revisar skills/ para asegurar que sean genéricos y útiles para cualquier proyecto.",
+      "priority": "medium",
+      "acceptance": [
+        "Skills son genéricos y reutilizables",
+        "Eliminar o adaptar skills muy específicos (PDF, GSAP si no son necesarios)",
+        "Documentar cada skill con propósito y cuándo usar",
+        "AGENTS.md tiene referencias correctas a skills/"
+      ],
+      "status": "done"
+    },
+    {
+      "id": 7,
+      "name": "tests_structure",
+      "title": "Estructura de tests",
+      "description": "Asegurar que tests/ tenga la estructura adecuada para tests automáticos del harness.",
+      "priority": "low",
+      "acceptance": [
+        "tests/ tiene estructura clara",
+        "Existen tests de ejemplo o plantillas",
+        "init.sh verifica y ejecuta tests si existen",
+        "Documentación sobre cómo agregar tests"
+      ],
+      "status": "done"
+    }
+  ]
+}
