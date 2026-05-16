@@ -102,5 +102,27 @@ class TestHarnessStructure(unittest.TestCase):
             self.assertTrue(os.path.exists(task), f"Falta: {task}")
 
 
+class TestSpecsStructure(unittest.TestCase):
+    """Validar que la capa specs tenga la estructura correcta."""
+
+    def test_specs_template_exists(self) -> None:
+        """specs/_template.md debe existir."""
+        self.assertTrue(os.path.exists("specs/_template.md"))
+
+    def test_specs_readme_exists(self) -> None:
+        """specs/_README.md debe existir."""
+        self.assertTrue(os.path.exists("specs/_README.md"))
+
+    def test_specs_example_complete(self) -> None:
+        """specs/example/ debe tener spec.md, changelog.md y decisions.md."""
+        expected = [
+            "specs/example/spec.md",
+            "specs/example/changelog.md",
+            "specs/example/decisions.md"
+        ]
+        for file in expected:
+            self.assertTrue(os.path.exists(file), f"Falta: {file}")
+
+
 if __name__ == "__main__":
     unittest.main()

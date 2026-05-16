@@ -56,6 +56,53 @@ usuario ─→ init.sh (verificación)
 - Definición de rol, responsabilidades, instrucciones específicas.
 - Un archivo por agente siguiendo patrón: `NN-nombre.md`.
 
+### specs/*/spec.md
+- Contrato funcional de un módulo usando formato BDD (DADO/CUANDO/ENTONCES).
+- Cada spec tiene estado: `draft`, `active`, o `deprecated`.
+- Se complementa con `changelog.md` (delta funcional) y `decisions.md` (ADRs).
+
+## La capa de specs
+
+### Por qué existe
+
+El harness orquesta CÓMO trabajan los agentes (vía `agents/`, `tasks/`,
+`progress/`). Pero sin specs, cada sesión arranca de cero respecto al
+comportamiento esperado del producto.
+
+La capa `specs/` agrega contexto persistente: un agente que retoma un módulo
+después de semanas lee la spec y sabe qué contratos funcionales respetar.
+
+### Relación con tasks/ y feature_list.json
+
+| Componente | Rol | Ejemplo |
+|------------|-----|---------|
+| `tasks/` | Órdenes para el agente | "Implementar login con remember me" |
+| `specs/` | Contratos del sistema | "El sistema SHALL mantener sesiones de 30 días" |
+| `feature_list.json` | Inventario de qué falta | Estado global de features |
+
+**No son redundantes**:
+- `tasks/` dice QUÉ HACER ahora.
+- `specs/` dice QUÉ DEBE HACER el sistema (contexto estable).
+- `feature_list.json` dice QUÉ FALTA (estado del proyecto).
+
+### Principio clave
+
+Las specs capturan COMPORTAMIENTO ESPERADO, no implementación.
+
+Un agente debe poder entender qué hace el módulo sin leer código fuente.
+Si necesita leer código para entender la spec, la spec está mal.
+
+### Cuándo las specs bloquean
+
+**Nunca**. Las specs son contexto, no gates.
+
+Un agente puede:
+- Implementar algo no especificado (documentarlo luego).
+- Cuestionar la spec si encuentra contradicciones.
+- Modificar la spec si el comportamiento cambia (vía changelog).
+
+Pero NO puede ignorar una spec existente sin documentar por qué.
+
 ## Qué NO hacer
 
 - No usar rutas hardcodeadas a proyectos específicos (ej: `/home/runner/workspace/`).

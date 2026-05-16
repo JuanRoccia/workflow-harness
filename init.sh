@@ -212,6 +212,46 @@ EOF
 fi
 
 echo ""
+echo "── 9. Verificando capa de specs ────────────────────"
+
+if [ -d "specs" ]; then
+  if [ -f "specs/_template.md" ]; then
+    ok "Template de specs existe: _template.md"
+  else
+    warn "Falta _template.md en specs/"
+  fi
+
+  if [ -f "specs/_README.md" ]; then
+    ok "Guía de specs existe: _README.md"
+  else
+    warn "Falta _README.md en specs/"
+  fi
+
+  ACTIVE_COUNT=0
+  DRAFT_COUNT=0
+  for dir in specs/*/; do
+    if [ -f "${dir}spec.md" ]; then
+      if grep -q "Estado.*active" "${dir}spec.md" 2>/dev/null; then
+        ACTIVE_COUNT=$((ACTIVE_COUNT + 1))
+      elif grep -q "Estado.*draft" "${dir}spec.md" 2>/dev/null; then
+        DRAFT_COUNT=$((DRAFT_COUNT + 1))
+      fi
+    fi
+  done
+
+  if [ "$ACTIVE_COUNT" -gt 0 ]; then
+    ok "Specs activas: $ACTIVE_COUNT"
+  else
+    warn "No hay specs activas en specs/"
+  fi
+  if [ "$DRAFT_COUNT" -gt 0 ]; then
+    warn "Specs en draft: $DRAFT_COUNT (promover a active cuando corresponda)"
+  fi
+else
+  warn "Carpeta specs/ no existe (opcional para proyectos nuevos)"
+fi
+
+echo ""
 echo "═══════════════════════════════════════════════════════════"
 echo "  RESUMEN DE INICIALIZACIÓN"
 echo "═══════════════════════════════════════════════════════════"

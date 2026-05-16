@@ -73,7 +73,8 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 1. Ejecuta `./init.sh` y verifica que termina sin errores. Si falla, **para**
    y resuelve el entorno antes de tocar código.
 2. Lee `progress/current.md` para entender en qué estado quedó la última sesión.
-3. Lee `TODO.md` y elige **una** tarea con estado `pending`. No
+3. Si existe `specs/[módulo-relevante]/spec.md`, léela antes de tocar ese módulo.
+4. Lee `TODO.md` y elige **una** tarea con estado `pending`. No
    trabajes en más de una a la vez.
 
 ## 2. Mapa del repositorio
@@ -89,6 +90,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 | `TASK-PRINCIPAL.md`          | Objetivo global del workflow                              | Para entender el propósito general |
 | `TESTING-MANUAL.md`          | Guía de testing manual                                    | Antes de validar cambios |
 | `BUGS-REPORT.md`             | Plantilla para reportar bugs                              | Al encontrar un error |
+| `specs/`                     | Contratos funcionales de cada módulo                     | Antes de tocar cualquier módulo |
 | `audits/`                    | Auditorías de seguridad y calidad                         | Para revisar hallazgos previos |
 | `tests/`                     | Tests automáticos o manuales                              | Para verificar |
 | `user/`                      | Documentación para usuarios                               | Referencia externa |
@@ -101,6 +103,8 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
   asegúrate de que el bloque de tests pasa al 100%.
 - **Documenta lo que haces** en `progress/current.md` mientras trabajas, no al final.
 - **Deja el repositorio limpio** antes de cerrar la sesión (ver §5).
+- **Si modificás comportamiento de un módulo que tiene spec, actualizá el
+  changelog.md de esa spec con el delta funcional.**
 - **Si no sabes algo, busca en `docs/`** antes de inventarlo.
 
 ## 4. Cómo elegir una tarea
